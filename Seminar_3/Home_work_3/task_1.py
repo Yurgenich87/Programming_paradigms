@@ -11,6 +11,7 @@ def check_winner(array, player):
         [[0, 2], [1, 1], [2, 0]]   # Диагональ справа налево
     ]
 
+    # Проверка всех условий победы
     for condition in win_conditions:
         marks = [array[row][col] for row, col in condition]
         if all(mark == player for mark in marks):
@@ -19,11 +20,13 @@ def check_winner(array, player):
 
 
 def print_board(array):
+    # Печать текущего состояния игровой доски
     for row in array:
         print(' '.join(row))
 
 
 def play_game():
+    # Создание пустой игровой доски
     letters = [['-' for _ in range(3)] for _ in range(3)]
     print_board(letters)
 
@@ -33,6 +36,7 @@ def play_game():
         row_index = int(input("Введите номер строки(от 1 до 3): ")) - 1
         column_index = int(input("Введите номер столбца(от 1 до 3): ")) - 1
 
+        # Проверка на доступность клетки и установка символа игрока
         if letters[row_index][column_index] == '-':
             letters[row_index][column_index] = player
         else:
@@ -41,6 +45,7 @@ def play_game():
 
         print_board(letters)
 
+        # Проверка победы игрока
         if check_winner(letters, player):
             print(f"<<< Выйграли {player} >>>")
             break
